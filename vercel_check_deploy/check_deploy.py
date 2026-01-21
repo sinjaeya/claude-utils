@@ -204,7 +204,8 @@ class VercelDeploymentMonitor:
             if not deployment:
                 return 1
 
-            state = deployment.get("state")
+            # v13 API는 readyState 사용, state가 없으면 readyState 체크
+            state = deployment.get("state") or deployment.get("readyState")
 
         # 최종 결과 출력
         if state == "READY":
